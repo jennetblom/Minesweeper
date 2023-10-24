@@ -4,5 +4,13 @@ public class Main {
     public static void main(String[] args) {
 
 
+
+        Gameboard gameboard= new Gameboard();
+       // gameboard.iniatialiseBoard();
+
+        char[][] board = new Board().newBoard(); // Initialize the game board
+
+        Board.printBoard(board); // Print out empty game board
+
     }
 }
