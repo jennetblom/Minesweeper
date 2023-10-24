@@ -3,6 +3,9 @@
 public class Main {
     public static void main(String[] args) {
 
+        char[][] board = new Board().newBoard(); // Initialize the game board
+
+        Board.printBoard(board); // Print out empty game board
 
     }
 }

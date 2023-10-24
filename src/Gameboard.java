@@ -8,12 +8,11 @@ public class Gameboard {
     private static Tile[][] board;
 
 
-    public Gameboard(){
+    public Gameboard() {
         board = new Tile[8][10];
     }
 
-    public void iniatialiseBoard(){
-
+    public void iniatialiseBoard() {
 
 
         System.out.println("_____________________________________________________________");
@@ -42,5 +41,4 @@ public class Gameboard {
         System.out.println("|     |     |     |     |     |     |     |     |     |     |");
         System.out.println("|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|");
     }
-
 }
