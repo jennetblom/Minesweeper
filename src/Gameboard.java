@@ -25,15 +25,15 @@ public class Gameboard {
             }
         }
             public void displayBoard() {
-                System.out.println("  | 0 1 2 3 4 5 6 7");
-                System.out.println("--|-----------------");
+                System.out.println("  | 0 1 2 3 4 5 6 7 8");
+                System.out.println("--|-------------------");
                 for (int row = 0; row < size; row++) {
                     System.out.print(row + " | ");
                     for (int col = 0; col < size; col++) {
                         Tile tile = board[row][col];
                         if (tile.isRevealed()) {
                             if (tile.isMine()) {
-                                System.out.print("* ");
+                                System.out.print("X ");
                             } /* else {
                                 // Display the count of adjacent mines
                             //    int adjacentMines = countAdjacentMines(row, col);
@@ -46,11 +46,6 @@ public class Gameboard {
                     System.out.println();
                 }
             }
-
-
-
-
-
 
     }
 

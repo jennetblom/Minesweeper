@@ -3,8 +3,13 @@
 public class Main {
     public static void main(String[] args) {
 
-        Gameboard gameboard = new Gameboard(8,10);
+        Gameboard gameboard = new Gameboard(9,10);
         gameboard.displayBoard();
 
+
+
+
     }
+
+
 }
