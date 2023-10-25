@@ -3,17 +3,8 @@
 public class Main {
     public static void main(String[] args) {
 
-        char[][] board = new Board().newBoard(); // Initialize the game board
-
-        Board.printBoard(board); // Print out empty game board
-
-
-        Gameboard gameboard= new Gameboard();
-       // gameboard.iniatialiseBoard();
-
-        char[][] board = new Board().newBoard(); // Initialize the game board
-
-        Board.printBoard(board); // Print out empty game board
+        Gameboard gameboard = new Gameboard(8,10);
+        gameboard.displayBoard();
 
     }
 }

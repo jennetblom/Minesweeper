@@ -6,39 +6,51 @@ public class Gameboard {
 
 
     private static Tile[][] board;
+    private int size;
+    private int numMines;
+
+    public Gameboard(int size, int numMines) {
+        this.size = size;
+        this.numMines = numMines;
+        this.board = new Tile[size][size];
+        initializeBoard();
+        }
+
+        private void initializeBoard() {
+            // Fill the board with empty tiles
+            for (int row = 0; row < size; row++) {
+                for (int col = 0; col < size; col++) {
+                    board[row][col] = new Tile(false);
+                }
+            }
+        }
+            public void displayBoard() {
+                System.out.println("  | 0 1 2 3 4 5 6 7");
+                System.out.println("--|-----------------");
+                for (int row = 0; row < size; row++) {
+                    System.out.print(row + " | ");
+                    for (int col = 0; col < size; col++) {
+                        Tile tile = board[row][col];
+                        if (tile.isRevealed()) {
+                            if (tile.isMine()) {
+                                System.out.print("* ");
+                            } /* else {
+                                // Display the count of adjacent mines
+                            //    int adjacentMines = countAdjacentMines(row, col);
+                          //      System.out.print(adjacentMines + " ");
+                            } */
+                        } else {
+                            System.out.print(". ");
+                        }
+                    }
+                    System.out.println();
+                }
+            }
 
 
-    public Gameboard() {
-        board = new Tile[8][10];
+
+
+
+
     }
 
-    public void iniatialiseBoard(){
-
-//
-//        System.out.println("_____________________________________________________________");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|  "+board[0][0]+"   |  "+board[0][1]+"   |  "+board[0][2]+"   |  "+board[0][4]+"   |     |     |     |     |     |     |");
-//        System.out.println("|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|     |     |     |     |     |     |     |     |     |     |");
-//        System.out.println("|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|");
-    }
-}
