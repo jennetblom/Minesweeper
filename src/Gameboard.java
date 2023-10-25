@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Gameboard {
 
 //    initializeBoard(): Denna metod kan användas för att skapa brädet och placera ut minor på slumpmässiga platser.
@@ -6,56 +8,87 @@ public class Gameboard {
 
 
     private static Tile[][] board;
+    //Skapar en 2D-array av spelbrädan bestående av Tile.
     private int size;
     private int numMines;
 
     public Gameboard(int size, int numMines) {
+        //Tar in hur stort spelbrädet ska vara och hur många minor.
         this.size = size;
         this.numMines = numMines;
         this.board = new Tile[size][size];
         initializeBoard();
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    private void initializeBoard() {
+        //Fyller brädan med tomma rutor
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                board[row][col] = new Tile(false);
+            }
         }
 
-        private void initializeBoard() {
-            // Fill the board with empty tiles
-            for (int row = 0; row < size; row++) {
-                for (int col = 0; col < size; col++) {
-                    board[row][col] = new Tile(false);
-                }
+        //Placerar ut minor på spelbrädet på slumpmässiga platser.
+        Random random = new Random();
+        int minesPlaced = 0;
+
+        while (minesPlaced < numMines) {
+            int row = random.nextInt(size);
+            int col = random.nextInt(size);
+            if (!board[row][col].isMine()) {
+                //Om rutan inte håller en mina redan, ska en mina placeras
+
+                board[row][col] = new Tile(true);
+                minesPlaced++;
             }
         }
-            public void displayBoard() {
-                System.out.println("  | 0 1 2 3 4 5 6 7 8");
-                System.out.println("--|-------------------");
-                for (int row = 0; row < size; row++) {
-                    System.out.print(row + " | ");
-                    for (int col = 0; col < size; col++) {
-                        Tile tile = board[row][col];
-                        if (tile.isRevealed()) {
-                            if (tile.isMine()) {
-                                System.out.print("X ");
-                            }  else {
-//                                 Display the count of adjacent mines
-//                                int adjacentMines = countAdjacentMines(row, col);
-//                                System.out.print(adjacentMines + " ");
-                            }
-                        } else {
-                            System.out.print(". ");
-                        }
+
+    }
+
+    public void displayBoard() {
+        //Ritar ut spelbrädet
+        //Om det är en mina och rutan är avslöjad: rita ut "X".
+        // Annars skriv ut hur många minor som är bredvid rutan.
+        //Annars om rutan ej är avslöjad, skriv bara ". "
+
+        System.out.println("  | 0 1 2 3 4 5 6 7 8");
+        System.out.println("--|-------------------");
+        for (int row = 0; row < size; row++) {
+            System.out.print(row + " | ");
+            for (int col = 0; col < size; col++) {
+                Tile tile = board[row][col];
+                if (tile.isRevealed()) {
+                    if (tile.isMine()) {
+                        System.out.print("X ");
+                    } else {
+                        int adjacentMines = countAdjacentMines(row, col);
+                        System.out.print(adjacentMines + " ");
+
                     }
-                    System.out.println();
+                } else {
+                    System.out.print(". ");
                 }
             }
+            System.out.println();
+        }
+    }
 
     public void revealTile(int row, int col) {
+        //Kontrollerar att det är inom spelplanets gränser och att rutan inte redan är avslöjad.
         if (row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed()) {
             board[row][col].reveal();
         }
     }
+
     public int countAdjacentMines(int row, int col) {
 
+        //Räknar antalet minor precis bredvid en ruta.
+
         int count = 0;
-        
 
 
         for (int i = -1; i <= 1; i++) {
@@ -82,7 +115,12 @@ public class Gameboard {
     }
 
     public boolean isWithinBoard(int row, int col) {
+        //Kontrollerar att det är inom spelbrädets gränser.
         return row >= 0 && row < size && col >= 0 && col < size;
     }
-    }
+
+
+}
+
+
 
