@@ -1,4 +1,5 @@
 public class Tile {
+
     private boolean isMine;
     private boolean isRevealed;
 
@@ -19,8 +20,8 @@ public class Tile {
     public boolean isRevealed() {
         return isRevealed;
     }
-
     public void reveal() {
+        //Avslöjar en ruta på spelbrädet
         isRevealed = true;
     }
 
