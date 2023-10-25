@@ -46,6 +46,34 @@ public class Gameboard {
                     System.out.println();
                 }
             }
+    public int countAdjacentMines(int row, int col) {
+        int count = 0;
 
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                // Hoppa över den aktuella rutan
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+
+                int adjacentRow = row + i;
+                int adjacentCol = col + j;
+
+                // Kontrollera om den närliggande rutan är inom brädet
+                if (isWithinBoard(adjacentRow, adjacentCol)) {
+                    Tile adjacentTile = board[adjacentRow][adjacentCol];
+                    if (adjacentTile.isMine()) {
+                        count++;
+                    }
+                }
+            }
+        }
+
+        return count;
+    }
+
+    public boolean isWithinBoard(int row, int col) {
+        return row >= 0 && row < size && col >= 0 && col < size;
+    }
     }
 
