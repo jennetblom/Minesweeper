@@ -34,11 +34,11 @@ public class Gameboard {
                         if (tile.isRevealed()) {
                             if (tile.isMine()) {
                                 System.out.print("X ");
-                            } /* else {
-                                // Display the count of adjacent mines
-                            //    int adjacentMines = countAdjacentMines(row, col);
-                          //      System.out.print(adjacentMines + " ");
-                            } */
+                            }  else {
+//                                 Display the count of adjacent mines
+//                                int adjacentMines = countAdjacentMines(row, col);
+//                                System.out.print(adjacentMines + " ");
+                            }
                         } else {
                             System.out.print(". ");
                         }
@@ -46,8 +46,17 @@ public class Gameboard {
                     System.out.println();
                 }
             }
+
     public int countAdjacentMines(int row, int col) {
         int count = 0;
+
+    public void revealTile(int row, int col) {
+        if (row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed()) {
+            board[row][col].reveal();
+        }
+    }
+
+
 
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
