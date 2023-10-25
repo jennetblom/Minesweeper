@@ -47,15 +47,15 @@ public class Gameboard {
                 }
             }
 
-    public int countAdjacentMines(int row, int col) {
-        int count = 0;
-
     public void revealTile(int row, int col) {
         if (row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed()) {
             board[row][col].reveal();
         }
     }
+    public int countAdjacentMines(int row, int col) {
 
+        int count = 0;
+        
 
 
         for (int i = -1; i <= 1; i++) {
