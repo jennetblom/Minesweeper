@@ -9,6 +9,12 @@ public class Game {
         System.out.println();
         board.displayBoard();
         Scanner scan = new Scanner(System.in);
+        while(true) {
+            int row = scan.nextInt();
+            int column = scan.nextInt();
+            board.revealTile(row, column);
+        }
+
 
 
 
