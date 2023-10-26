@@ -6,7 +6,8 @@ public class Gameboard {
 //    displayBoard(): Denna metod kan användas för att visa brädet för spelaren.
 //    Kanske visa okända rutor som frågetecken, flaggade rutor som flaggor, etc.
 
-
+//    Gameboard: Den här klassen representerar spelbrädet. Den håller koll på alla tiles (rutor),
+//    samt kanske checka statusen på en tile (om det är en bomb, om den är markerad, etc).
     private static Tile[][] board;
     //Skapar en 2D-array av spelbrädan bestående av Tile.
     private int size;
@@ -143,7 +144,11 @@ public class Gameboard {
             }
         }
     }
+    private boolean isValidMove(int row, int col) {
+        return row >= 0 && row < size && col >= 0 && col < size  && !board[row][col].isRevealed();
+    }
 }
+
 
 
 
