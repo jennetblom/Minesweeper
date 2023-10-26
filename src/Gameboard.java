@@ -50,33 +50,50 @@ public class Gameboard {
     }
 
     public void displayBoard() {
-        //Ritar ut spelbrädet
-        //Om det är en mina och rutan är avslöjad: rita ut "X".
-        // Annars skriv ut hur många minor som är bredvid rutan.
-        //Annars om rutan ej är avslöjad, skriv bara ". "
+//        //Ritar ut spelbrädet
 
-        System.out.println("  | 0 1 2 3 4 5 6 7 8");
-        System.out.println("--|-------------------");
+        //Bomb = Rött kryss = "X ";
+        //Inte undersökt ruta = "."
+        //Undersökt ruta utan bomber bredvid = 0;
+        //Undersökt ruta med bomber bredvid = 1+;
+
+        System.out.print("  |");
+        for(int col=0; col<board.length;col++){
+            System.out.print(" " + col + "  ");
+        }
+        System.out.println();
+        System.out.print("--|");
+        for(int col=0;col< board.length;col++){
+            System.out.print("---|");
+        }
+        System.out.println();
+
+
         for (int row = 0; row < size; row++) {
             System.out.print(row + " | ");
             for (int col = 0; col < size; col++) {
                 Tile tile = board[row][col];
                 if (tile.isRevealed()) {
                     if (tile.isMine()) {
-                        System.out.print("X ");
+                        System.out.print("X | ");
                     } else {
+                        // Display the count of adjacent mines
                         int adjacentMines = countAdjacentMines(row, col);
-                        System.out.print(adjacentMines + " ");
-
+                        System.out.print(adjacentMines + " | ");
                     }
                 } else {
-                    System.out.print(". ");
+                    System.out.print(". | ");
                 }
+            }
+            System.out.println();
+            System.out.print("  |");
+
+            for(int col=0;col<board.length;col++){
+                System.out.print("___|");
             }
             System.out.println();
         }
     }
-
     public void revealTile(int row, int col) {
         //Kontrollerar att det är inom spelplanets gränser och att rutan inte redan är avslöjad.
         if (row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed()) {
@@ -118,8 +135,14 @@ public class Gameboard {
         //Kontrollerar att det är inom spelbrädets gränser.
         return row >= 0 && row < size && col >= 0 && col < size;
     }
+    public void showAllTiles() {
 
-
+        for(int row=0;row< board.length;row++){
+            for(int column=0;column< board.length;column++){
+                revealTile(row,column);
+            }
+        }
+    }
 }
 
 
