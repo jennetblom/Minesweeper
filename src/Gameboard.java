@@ -75,7 +75,7 @@ public class Gameboard {
                 Tile tile = board[row][col];
                 if (tile.isRevealed()) {
                     if (tile.isMine()) {
-                        System.out.print("X | ");
+                        System.out.print("\u001B[31mX\u001B[0m | ");
                     } else {
                         // Display the count of adjacent mines
                         int adjacentMines = countAdjacentMines(row, col);
