@@ -8,8 +8,6 @@ public class Gameboard {
 
 //    Gameboard: Den här klassen representerar spelbrädet. Den håller koll på alla tiles (rutor),
 //    samt kanske checka statusen på en tile (om det är en bomb, om den är markerad, etc).
-
-
     private static Tile[][] board;
     //Skapar en 2D-array av spelbrädan bestående av Tile.
     private int size;

@@ -6,13 +6,9 @@ public class Main {
 //        Main: Den här klassen startar spelet.
 //        Den kan skapa ett nytt Game-objekt och sedan köra spelet.
 
-        Gameboard gameboard = new Gameboard(9,10);
-        gameboard.displayBoard();
-
-
+        Game game = new Game(8,9);
+        game.play();
 
 
     }
-
-
 }
