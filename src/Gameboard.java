@@ -144,6 +144,9 @@ public class Gameboard {
             }
         }
     }
+    private boolean isValidMove(int row, int col) {
+        return row >= 0 && row < size && col >= 0 && col < size  && !board[row][col].isRevealed();
+    }
 }
 
 
