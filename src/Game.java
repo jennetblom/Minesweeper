@@ -27,18 +27,36 @@ public class Game {
         board.revealTile(row, column);
 
 
-        if (GameOver(board.getTile(row, column))) {
-            board.showAllTiles(); 
-            System.out.println("Game Over!");
-            System.exit(0);
-        }
     }
     public void play(){
-        while(true) {
+        boolean gameOver= false;
+        do {
             board.displayBoard();
             this.openTile();
-            //board.showAllTiles();
-        }
+
+            if (isGameLost()){
+                board.showAllTiles();
+                System.out.println("Game Over!");
+                gameOver = true;
+            }
+
+        }while(!gameOver);
     }
-}
+    public boolean isGameLost() {
+        for (int row = 0; row < board.getSize(); row++) {
+            for (int column = 0; column < board.getSize(); column++) {
+                Tile tile = board.getTile(row,column);
+                if(tile.isMine()&&tile.isRevealed())
+                    return true;
+                }
+            }
+            return false;
+        }
+    public boolean isGameWon(){
+      //  for(int row=0;)
+        return false;
+    }
+
+    }
+
 
