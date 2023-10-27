@@ -9,12 +9,29 @@ public class Game {
 //        startar ett nytt spel, och kanske även kontrollerar spelarens interaktioner.
         this.board=new Gameboard( size,numMines);
     }
+
+
+    public boolean GameOver(Tile tile) {
+        if (tile.isMine() && tile.isRevealed()) {
+            return true;
+        }
+        return false;
+    }
+
+
     public void openTile(){
         System.out.println("Which tile do you want to choose? Choose which row and column e.g (24)");
         String input=scan.nextLine();
         int row = Character.getNumericValue(input.charAt(0));
         int column = Character.getNumericValue(input.charAt(1));
         board.revealTile(row, column);
+
+
+        if (GameOver(board.getTile(row, column))) {
+            board.showAllTiles(); 
+            System.out.println("Game Over!");
+            System.exit(0);
+        }
     }
     public void play(){
         while(true) {
