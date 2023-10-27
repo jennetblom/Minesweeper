@@ -71,7 +71,8 @@ public class Gameboard {
 
 
         for (int row = 0; row < size; row++) {
-            System.out.print(row + " | ");
+
+                System.out.print(row + " | ");
             for (int col = 0; col < size; col++) {
                 Tile tile = board[row][col];
                 if (tile.isRevealed()) {
