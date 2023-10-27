@@ -97,12 +97,6 @@ public class Gameboard {
         }
 
     }
-//    public static void gameOver(int row, int col){
-//        if (board.isMine() && .isRevealed()) {
-//            System.out.println("Game Over!");
-//        }
-//
-//    }
     public void revealTile(int row, int col) {
         //Kontrollerar att det är inom spelplanets gränser och att rutan inte redan är avslöjad.
         if (row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed()) {
@@ -151,6 +145,7 @@ public class Gameboard {
                 revealTile(row,column);
             }
         }
+        displayBoard();
     }
     private boolean isValidMove(int row, int col) {
         return row >= 0 && row < size && col >= 0 && col < size  && !board[row][col].isRevealed();

@@ -6,8 +6,10 @@ public class Main {
 //        Main: Den här klassen startar spelet.
 //        Den kan skapa ett nytt Game-objekt och sedan köra spelet.
 
-        Game game = new Game(9,9);
-        game.play();
+        while(true) {
+            Game game = new Game(9,10);
+            game.play();
+        }
 
 
     }
