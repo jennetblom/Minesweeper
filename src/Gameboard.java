@@ -152,7 +152,11 @@ public class Gameboard {
     }
 
     public Tile getTile(int row, int col) {
+
+        if (isWithinBoard(row, col)) {
             return board[row][col];
+        }
+        return null;
     }
 }
 
