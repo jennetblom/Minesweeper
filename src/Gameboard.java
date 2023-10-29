@@ -6,8 +6,7 @@ public class Gameboard {
 //    displayBoard(): Denna metod kan användas för att visa brädet för spelaren.
 //    Kanske visa okända rutor som frågetecken, flaggade rutor som flaggor, etc.
 
-//    Gameboard: Den här klassen representerar spelbrädet. Den håller koll på alla tiles (rutor),
-//    samt kanske checka statusen på en tile (om det är en bomb, om den är markerad, etc).
+
     private static Tile[][] board;
     //Skapar en 2D-array av spelbrädan bestående av Tile.
     private int size;
@@ -51,57 +50,33 @@ public class Gameboard {
     }
 
     public void displayBoard() {
-//        //Ritar ut spelbrädet
+        //Ritar ut spelbrädet
+        //Om det är en mina och rutan är avslöjad: rita ut "X".
+        // Annars skriv ut hur många minor som är bredvid rutan.
+        //Annars om rutan ej är avslöjad, skriv bara ". "
 
-        //Bomb = Rött kryss = "X ";
-        //Inte undersökt ruta = "."
-        //Undersökt ruta utan bomber bredvid = 0;
-        //Undersökt ruta med bomber bredvid = 1+;
-
-        System.out.print("  |");
-        for(int col=0; col<board.length;col++){
-            System.out.print(" " + col + "  ");
-        }
-        System.out.println();
-        System.out.print("--|");
-        for(int col=0;col< board.length;col++){
-            System.out.print("---|");
-        }
-        System.out.println();
-
-
+        System.out.println("  | 0 1 2 3 4 5 6 7 8");
+        System.out.println("--|-------------------");
         for (int row = 0; row < size; row++) {
             System.out.print(row + " | ");
             for (int col = 0; col < size; col++) {
                 Tile tile = board[row][col];
                 if (tile.isRevealed()) {
                     if (tile.isMine()) {
-                        System.out.print("\u001B[31mX\u001B[0m | ");
+                        System.out.print("X ");
                     } else {
-                        // Display the count of adjacent mines
                         int adjacentMines = countAdjacentMines(row, col);
-                        System.out.print(adjacentMines + " | ");
+                        System.out.print(adjacentMines + " ");
+
                     }
                 } else {
-                    System.out.print(". | ");
+                    System.out.print(". ");
                 }
             }
             System.out.println();
-            System.out.print("  |");
-
-            for(int col=0;col<board.length;col++){
-                System.out.print("___|");
-            }
-            System.out.println();
         }
-
     }
-//    public static void gameOver(int row, int col){
-//        if (board.isMine() && .isRevealed()) {
-//            System.out.println("Game Over!");
-//        }
-//
-//    }
+
     public void revealTile(int row, int col) {
         //Kontrollerar att det är inom spelplanets gränser och att rutan inte redan är avslöjad.
         if (row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed()) {
@@ -143,26 +118,20 @@ public class Gameboard {
         //Kontrollerar att det är inom spelbrädets gränser.
         return row >= 0 && row < size && col >= 0 && col < size;
     }
-    public void showAllTiles() {
-
-        for(int row=0;row< board.length;row++){
-            for(int column=0;column< board.length;column++){
-                revealTile(row,column);
+    //Kolla om en mina är träffad
+    public boolean isGameOver() {
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                Tile tile = board[row][col];
+                if (tile.isRevealed() && tile.isMine()) {
+                    return true; // Game over if a mine is revealed.
+                }
             }
         }
-    }
-    private boolean isValidMove(int row, int col) {
-        return row >= 0 && row < size && col >= 0 && col < size  && !board[row][col].isRevealed();
+        return false; // Game is not over yet.
     }
 
-    public Tile getTile(int row, int col) {
-        if (isWithinBoard(row, col)) {
-            return board[row][col];
-        }
-        return null;
-    }
 }
-
 
 
 
