@@ -45,11 +45,11 @@ public class Game {
             System.out.println("Invalid position, please try again!");
         }
 
-        public void play () {
-            while (true) {
-                board.displayBoard();
-                this.openTile();
-            }
+    }
+    public void play() {
+        while(true) {
+            board.displayBoard();
+            this.openTile();
         }
-    }}
-
+    }
+}
