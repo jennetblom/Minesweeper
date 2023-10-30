@@ -82,6 +82,8 @@ public class Gameboard {
                         int adjacentMines = countAdjacentMines(row, col);
                         System.out.print(adjacentMines + " | ");
                     }
+                } else if (tile.isFlagged()) {
+                    System.out.print("F | ");
                 } else {
                     System.out.print(". | ");
                 }
@@ -160,6 +162,12 @@ public class Gameboard {
             return board[row][col];
         }
         return null;
+    }
+
+    public void toggleFlag(int row, int col) {
+        if (isWithinBoard(row, col)) {
+            board[row][col].toggleFlag();
+        }
     }
 }
 

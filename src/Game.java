@@ -20,24 +20,36 @@ public class Game {
     }
 
 
-    public void openTile(){
+    public void openTile() {
         System.out.println("Which tile do you want to choose? Choose which row and column!");
         int row = scan.nextInt();
         int column = scan.nextInt();
-        board.revealTile(row, column);
+        Tile selectedTile = board.getTile(row, column);
 
+        if (selectedTile != null) {
+            System.out.println("Do you want to reveal (R) or flag/unflag (F) the tile?");
+            String action = scan.next();
 
-        if (GameOver(board.getTile(row, column))) {
-            board.showAllTiles(); 
-            System.out.println("Game Over!");
-            System.exit(0);
+            if (action.equalsIgnoreCase("R")) {
+                board.revealTile(row, column);
+                if (GameOver(selectedTile)) {
+                    board.showAllTiles();
+                    System.out.println("Game over!");
+                    System.exit(0);
+                }
+
+            } else if (action.equalsIgnoreCase("F")) {
+                board.toggleFlag(row, column);
+            }
+        } else {
+            System.out.println("Invalid position, please try again!");
         }
-    }
-    public void play(){
-        while(true) {
-            board.displayBoard();
-            this.openTile();
+
+        public void play () {
+            while (true) {
+                board.displayBoard();
+                this.openTile();
+            }
         }
-    }
-}
+    }}
 
