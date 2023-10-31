@@ -27,8 +27,15 @@ public class Game {
         Tile selectedTile = board.getTile(row, column);
 
         if (selectedTile != null) {
-            System.out.println("Do you want to reveal (R) or flag/unflag (F) the tile?");
-            String action = scan.next();
+            String action = "";
+
+            while (!action.equalsIgnoreCase("R") && !action.equalsIgnoreCase("F")) {
+                System.out.println("Do you want to reveal (R) or flag/unflag (F) the tile?");
+                action = scan.next();
+                if (!action.equalsIgnoreCase("R") && !action.equalsIgnoreCase("F")) {
+                    System.out.println("Incorrect input, please try again!");
+                }
+            }
 
             if (action.equalsIgnoreCase("R")) {
                 board.revealTile(row, column);
