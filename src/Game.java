@@ -83,13 +83,16 @@ import java.util.Scanner;
 public class Game {
 
     private static String playerName;
+    private int wins = 0;
+    private int losses = 0;
+    private Scanner scan;
     public static void main(String[] args) {
         boolean playAgain = true;
         Scanner scan = new Scanner(System.in);
 
         while (playAgain) {
-            Gameboard gameboard = new Gameboard(9, 10);
-            System.out.println("Welcome to the game of Minesweeper! :D");
+            Gameboard gameboard = new Gameboard(8, 10);
+            System.out.println("Let´s play some Minesweeper! :D");
             System.out.println();
             gameboard.displayBoard();
 
@@ -107,7 +110,7 @@ public class Game {
             }
 
             while (!gameOver) {
-                try {
+                try { //Try/catch för att säkerställa rätt input
                     System.out.print(playerName + ", Enter row and column to reveal (e.g., 00): ");
                     String input = scan.next();
                     if (input.length() != 2) {
@@ -118,10 +121,10 @@ public class Game {
                     int row = Character.getNumericValue(input.charAt(0));
                     int column = Character.getNumericValue(input.charAt(1));
 
-                    if (row < 0 || row >= gameboard.getSize() || column < 0 || column >= gameboard.getSize()) {
-                        System.out.println("Invalid input. Please enter valid coordinates.");
-                        continue;
-                    }
+//                    if (row < 0 || row >= gameboard.getSize() || column < 0 || column >= gameboard.getSize()) {
+//                        System.out.println("Invalid input. Please enter valid coordinates.");
+//                        continue;
+//                    }
 
 
 
@@ -141,8 +144,8 @@ public class Game {
                         System.out.println("Game over! You hit a mine.");
                         gameOver = true;
                     }
-                } catch (java.util.InputMismatchException e) {
-                    System.out.println("That´s a NO! Please enter two numbers between " + "1 - " + gameboard.getSize());
+                } catch (java.util.InputMismatchException e) { //Returnerar ifall man anger fler än 2 fel input
+                    System.out.println("Invalid input! Please enter two numbers between " + "1 - " + gameboard.getSize());
                     scan.nextLine(); // Clear the input buffer
                 }
             }

@@ -55,34 +55,76 @@ public class Gameboard {
         // Annars skriv ut hur många minor som är bredvid rutan.
         //Annars om rutan ej är avslöjad, skriv bara ". "
 
-        System.out.println("  | 0 1 2 3 4 5 6 7 8");
-        System.out.println("--|-------------------");
+        System.out.print("  |");
+        for(int col=0; col<board.length;col++){
+            System.out.print(" " + col + "  ");
+        }
+        System.out.println();
+        System.out.print("--|");
+        for(int col=0;col< board.length;col++){
+            System.out.print("---|");
+        }
+        System.out.println();
+
         for (int row = 0; row < size; row++) {
             System.out.print(row + " | ");
             for (int col = 0; col < size; col++) {
                 Tile tile = board[row][col];
                 if (tile.isRevealed()) {
                     if (tile.isMine()) {
-                        System.out.print("X ");
+                        System.out.print("\u001B[31mX\u001B[0m | ");
                     } else {
+                        // Display the count of adjacent mines
                         int adjacentMines = countAdjacentMines(row, col);
-                        System.out.print(adjacentMines + " ");
-
+                        System.out.print(adjacentMines + " | ");
                     }
                 } else {
-                    System.out.print(". ");
+                    System.out.print(". | ");
                 }
             }
             System.out.println();
+            System.out.print("  |");
+
+            for(int col=0;col<board.length;col++){
+                System.out.print("___|");
+            }
+            System.out.println();
+        }
+
+    }
+
+    public void revealTile(int row, int col) { //Öppna brädet till närmsta högre siffra än 0 ifall man träffar en nolla
+        if (row < 0 || row >= size || col < 0 || col >= size || board[row][col].isRevealed()) {
+            return; // Return if the tile is out of bounds or already revealed.
+        }
+
+        board[row][col].reveal();
+
+        if (board[row][col].isMine()) {
+            return; // Return if it's a mine.
+        }
+
+        if (countAdjacentMines(row, col) == 0) {
+// If it's a "0" tile, reveal all nearby tiles with "0" until a higher number is revealed
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    int adjacentRow = row + i;
+                    int adjacentCol = col + j;
+                    if (isWithinBoard(adjacentRow, adjacentCol)) {
+                        revealTile(adjacentRow, adjacentCol);
+                    }
+                }
+            }
         }
     }
 
-    public void revealTile(int row, int col) {
-        //Kontrollerar att det är inom spelplanets gränser och att rutan inte redan är avslöjad.
-        if (row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed()) {
-            board[row][col].reveal();
-        }
-    }
+
+//    public void revealTile(int row, int col) {
+//        //Kontrollerar att det är inom spelplanets gränser och att rutan inte redan är avslöjad.
+//        if (row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed()) {
+//            board[row][col].reveal();
+//        }
+//    }
 
     public int countAdjacentMines(int row, int col) {
 
