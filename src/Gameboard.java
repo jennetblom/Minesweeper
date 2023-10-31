@@ -83,7 +83,7 @@ public class Gameboard {
                         System.out.print(adjacentMines + " | ");
                     }
                 } else if (tile.isFlagged()) {
-                    System.out.print("F | ");
+                    System.out.print("\u001B[31mF\u001B[0m | ");
                 } else {
                     System.out.print(". | ");
                 }
