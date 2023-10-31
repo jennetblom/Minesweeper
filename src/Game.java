@@ -10,16 +10,41 @@ public class Game {
 //        startar ett nytt spel, och kanske även kontrollerar spelarens interaktioner.
         this.board = new Gameboard(size, numMines);
     }
+
     public void openTile() {
-        System.out.println("Which tile do you want to choose? Choose which row and column e.g (24)");
+        System.out.println("Which tile do you want to choose? Choose which row and column!");
+        
         String input = scan.nextLine();
         int row = Character.getNumericValue(input.charAt(0));
-        int column = Character.getNumericValue(input.charAt(1));
-        board.revealTile(row, column);
+        int column = Character.getNumericValue(input.charAt(1));  
+  
+        Tile selectedTile = board.getTile(row, column);
+
+        if (selectedTile != null) {
+            String action = "";
+
+            while (!action.equalsIgnoreCase("R") && !action.equalsIgnoreCase("F")) {
+                System.out.println("Do you want to reveal (R) or flag/unflag (F) the tile?");
+                action = scan.next();
+                if (!action.equalsIgnoreCase("R") && !action.equalsIgnoreCase("F")) {
+                    System.out.println("Incorrect input, please try again!");
+                }
+            }
+
+            if (action.equalsIgnoreCase("R")) {
+                board.revealTile(row, column);
+         
+
+            } else if (action.equalsIgnoreCase("F")) {
+                board.toggleFlag(row, column);
+            }
+        } else {
+            System.out.println("Invalid position, please try again!");
+        }
+
     }
-
     public void play() {
-
+      
         boolean gameOver = false;
         do {
             // board.showAllTiles();
@@ -67,5 +92,3 @@ public class Game {
     }
 
 }
-
-

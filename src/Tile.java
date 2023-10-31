@@ -2,11 +2,13 @@ public class Tile {
 
     private boolean isMine;
     private boolean isRevealed;
+    private boolean isFlagged;
 
 
     public Tile(boolean isMine){
         this.isMine=isMine;
         this.isRevealed=false;
+        this.isFlagged=false;
     }
 
     public boolean isMine() {
@@ -23,6 +25,14 @@ public class Tile {
     public void reveal() {
         //Avslöjar en ruta på spelbrädet
         isRevealed = true;
+    }
+
+    public boolean isFlagged() {
+        return isFlagged;
+    }
+
+    public void toggleFlag() {
+        isFlagged = !isFlagged;
     }
 
 
