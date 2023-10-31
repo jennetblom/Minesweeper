@@ -99,6 +99,7 @@ public class Gameboard {
         }
 
     }
+
     public void revealTile(int row, int col) {
         //Kontrollerar att det är inom spelplanets gränser och att rutan inte redan är avslöjad.
         if (row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed()) {

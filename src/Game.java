@@ -15,8 +15,9 @@ public class Game {
         System.out.println("Which tile do you want to choose? Choose which row and column!");
         
         String input = scan.nextLine();
+
         int row = Character.getNumericValue(input.charAt(0));
-        int column = Character.getNumericValue(input.charAt(1));  
+        int column = Character.getNumericValue(input.charAt(1));
   
         Tile selectedTile = board.getTile(row, column);
 
@@ -25,7 +26,7 @@ public class Game {
 
             while (!action.equalsIgnoreCase("R") && !action.equalsIgnoreCase("F")) {
                 System.out.println("Do you want to reveal (R) or flag/unflag (F) the tile?");
-                action = scan.next();
+                action = scan.nextLine();
                 if (!action.equalsIgnoreCase("R") && !action.equalsIgnoreCase("F")) {
                     System.out.println("Incorrect input, please try again!");
                 }
