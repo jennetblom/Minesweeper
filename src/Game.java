@@ -5,7 +5,20 @@ public class Game {
     private static String playerName;
     static Scanner scan = new Scanner(System.in);
     private Gameboard board;
+    boolean playAgain = true;
 
+
+    public void enterUsername() {
+        while (true) {
+            System.out.print("Enter your name: ");
+            playerName = scan.nextLine().trim();
+            if (!playerName.isEmpty()) {//make sure name is not empty
+                break;
+            } else {
+                System.out.println("Please enter a valid name.");
+            }
+        }
+    }
     public Game(int size, int numMines, String playerName) {
 //        Game: Den här klassen kontrollerar spelets logik. Den håller koll på spelets status (pågående, vunnet, förlorat),
 //        startar ett nytt spel, och kanske även kontrollerar spelarens interaktioner.
@@ -105,4 +118,24 @@ public class Game {
         return true;
     }
 
-}
+    public void playAgain() {
+        while (playAgain) {
+            Game game = new Game(9, 10, playerName);
+            game.play();
+
+            while (true) {
+                System.out.print("Play again? (yes/no): ");
+                String playAgainInput = scan.nextLine().toLowerCase();
+
+                if (playAgainInput.equals("yes")) {
+                    playAgain = true;
+                    break;
+                } else if (playAgainInput.equals("no")) {
+                    playAgain = false;
+                    break;
+                } else {
+                    System.out.println("Sorry, I didn't really understand what you meant! Please enter 'yes' or 'no'.");
+                }
+            }
+        }
+    }}

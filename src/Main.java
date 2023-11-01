@@ -12,30 +12,15 @@ public class Main {
         //playagain
 
         Scanner scan = new Scanner(System.in);
-        boolean playAgain = true;
-        String playerName;
 
-        while (true) {
-            System.out.print("Enter your name: ");
-            playerName = scan.nextLine().trim();
-            if (!playerName.isEmpty()) {//make sure name is not empty
-                break;
-            } else {
-                System.out.println("Please enter a valid name.");
-            }
-        }
+        String playerName = "";
 
-        while (playAgain) {
-            Game game = new Game(9, 10, playerName);
-            game.play();
 
-            System.out.print("Play again? (yes/no): ");
-            String playAgainInput = scan.next().toLowerCase();
+        Game game = new Game(9, 10, playerName);
+        game.enterUsername();
+        game.playAgain();
 
-            if (!playAgainInput.equals("yes")) {
-                playAgain = false;
-            }
-        }
+
         System.out.println("Thanks for playing!");
     }
 
