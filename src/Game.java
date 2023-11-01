@@ -71,6 +71,10 @@ public class Game {
 
     }
     public void play() {
+
+        System.out.println();
+        System.out.println("\uD83D\uDCA3 WELCOME TO MINESWEEPER! \uD83D\uDCA3");
+        System.out.println();
       
         boolean gameOver = false;
         do {
