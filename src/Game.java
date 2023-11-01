@@ -13,19 +13,39 @@ public class Game {
         this.playerName = playerName;
     }
 
-    public void chooseTile() {
-        System.out.print(playerName + ": Enter row and column to reveal (e.g. 24): ");
+    public void openTile() {
+        //System.out.print(playerName + ": Enter row and column to reveal (e.g. 24): ");
 
-        String input = scan.nextLine();
         boolean validInput=false;
 
+        int row=0;
+        int column=0;
 
-        int row = Character.getNumericValue(input.charAt(0));
-        int column = Character.getNumericValue(input.charAt(1));
+        while (true) {
+            try { //Try/catch för att säkerställa rätt input
+                System.out.print(playerName + ": Enter row and column to reveal (e.g. 00): ");
+                String input = scan.nextLine();
+                if (input.length() != 2) {
+                    System.out.println("Invalid input. Please enter two digits for row and column.");
+                    continue;
+                }
+
+
+                row = Character.getNumericValue(input.charAt(0));
+                column = Character.getNumericValue(input.charAt(1));
+
+                if(board.isValidMove(row,column)){
+                   break;
+                }
+
+
+            } catch (java.util.InputMismatchException e) { //Returnerar ifall man anger fler än 2 fel input
+                System.out.println("Invalid input! Please enter two numbers between " + "1 - " + board.getSize());
+                scan.nextLine(); // Clear the input buffer
+            }
+        }
 
         revealOrFlag(row,column);
-        
-
     }
     public void revealOrFlag(int row, int column){
 
@@ -59,7 +79,7 @@ public class Game {
         do {
             // board.showAllTiles();
             board.displayBoard();
-            this.chooseTile();
+            this.openTile();
 
             if (isGameLost()) {
                 board.showAllTiles();
