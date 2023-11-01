@@ -50,6 +50,10 @@ public class Game {
                 row = Character.getNumericValue(input.charAt(0));
                 column = Character.getNumericValue(input.charAt(1));
 
+                if(!board.isValidMove(row,column)){
+                    System.out.println("This tile is taken :(");
+                }
+
                 if (board.isValidMove(row, column)) {
                     break;
                 }
