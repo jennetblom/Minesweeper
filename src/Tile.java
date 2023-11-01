@@ -10,7 +10,6 @@ public class Tile {
         this.isRevealed = false;
         this.isFlagged = false;
     }
-
     public boolean isMine() {
         return isMine;
     }
@@ -27,7 +26,6 @@ public class Tile {
         //Avslöjar en ruta på spelbrädet
         isRevealed = true;
     }
-
     public boolean isFlagged() {
         return isFlagged;
     }

@@ -100,7 +100,8 @@ public class Gameboard {
 
     }
 
-    public void revealTile(int row, int col) { //Öppna brädet till närmsta högre siffra än 0 ifall man träffar en nolla
+    public void revealTile(int row, int col) {
+        //Öppna brädet till närmsta högre siffra än 0 ifall man träffar en nolla
         if (row < 0 || row >= size || col < 0 || col >= size || board[row][col].isRevealed()) {
             return; // Return if the tile is out of bounds or already revealed.
         }
@@ -124,14 +125,6 @@ public class Gameboard {
             }
         }
     }
-
-    public void revealFirstTile(int row, int col) {
-        //Kontrollerar att det är inom spelplanets gränser och att rutan inte redan är avslöjad.
-        if (row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed()) {
-            board[row][col].reveal();
-        }
-    }
-
     public int countAdjacentMines(int row, int col) {
 
         //Räknar antalet minor precis bredvid en ruta.
