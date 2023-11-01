@@ -74,7 +74,7 @@ public class Game {
         }
     }
     public void play() {
-      
+
         boolean gameOver = false;
         do {
             // board.showAllTiles();
