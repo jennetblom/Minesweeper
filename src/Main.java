@@ -8,8 +8,6 @@ public class Main {
 //        Main: Den här klassen startar spelet.
 //        Den kan skapa ett nytt Game-objekt och sedan köra spelet.
 
-        //enterUsername
-        //playagain
 
         Scanner scan = new Scanner(System.in);
 
@@ -19,7 +17,6 @@ public class Main {
         Game game = new Game(9, 10, playerName);
         game.enterUsername();
         game.playAgain();
-
 
         System.out.println("Thanks for playing!");
     }
