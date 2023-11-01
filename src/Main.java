@@ -26,7 +26,7 @@ public class Main {
         }
 
         while (playAgain) {
-            Game game = new Game(9, 10, playerName);
+            Game game = new Game(10, 10, playerName);
             game.play();
 
             System.out.print("Play again? (yes/no): ");

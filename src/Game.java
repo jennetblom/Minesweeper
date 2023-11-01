@@ -13,25 +13,22 @@ public class Game {
         this.playerName = playerName;
     }
 
-    public void openTile() {
+    public void chooseTile() {
         System.out.print(playerName + ": Enter row and column to reveal (e.g. 24): ");
 
         String input = scan.nextLine();
-        boolean gameOver=false;
+        boolean validInput=false;
 
-
-//        while (board.isValidMove(row, column)) {
-//            try { //Try/catch för att säkerställa rätt input
-//                System.out.print(playerName + ", Enter row and column to reveal (e.g., 00): ");
-//                String input = scan.next();
-//                if (input.length() != 2) {
-//                    System.out.println("Invalid input. Please enter two digits for row and column.");
-//                    continue;
-//                }
 
         int row = Character.getNumericValue(input.charAt(0));
         int column = Character.getNumericValue(input.charAt(1));
-  
+
+        revealOrFlag(row,column);
+        
+
+    }
+    public void revealOrFlag(int row, int column){
+
         Tile selectedTile = board.getTile(row, column);
 
         if (selectedTile != null) {
@@ -47,7 +44,7 @@ public class Game {
 
             if (action.equalsIgnoreCase("R")) {
                 board.revealTile(row, column);
-         
+
 
             } else if (action.equalsIgnoreCase("F")) {
                 board.toggleFlag(row, column);
@@ -55,7 +52,6 @@ public class Game {
         } else {
             System.out.println("Invalid position, please try again!");
         }
-
     }
     public void play() {
       
@@ -63,7 +59,7 @@ public class Game {
         do {
             // board.showAllTiles();
             board.displayBoard();
-            this.openTile();
+            this.chooseTile();
 
             if (isGameLost()) {
                 board.showAllTiles();
@@ -104,5 +100,4 @@ public class Game {
         }
         return true;
     }
-
 }
