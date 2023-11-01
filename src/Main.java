@@ -11,7 +11,6 @@ public class Main {
         game.enterUsername();
         game.playAgain();
 
-
         System.out.println("Thanks for playing!");
     }
 
