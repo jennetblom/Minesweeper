@@ -13,9 +13,13 @@ public class Game {
         this.board = new Gameboard(size, numMines);
         this.playerName = playerName;
     }
-  
+
     public void enterUsername() {
         while (true) {
+            System.out.println();
+            System.out.println("\uD83D\uDCA3 WELCOME TO MINESWEEPER! \uD83D\uDCA3");
+            System.out.println();
+
             System.out.print("Enter your name: ");
             playerName = scan.nextLine().trim();
             if (!playerName.isEmpty()) {//make sure name is not empty
@@ -26,13 +30,12 @@ public class Game {
         }
     }
 
-    public void openTile() {
-        //System.out.print(playerName + ": Enter row and column to reveal (e.g. 24): ");
+    public void chooseTile() {
 
-        boolean validInput=false;
+        boolean validInput = false;
 
-        int row=0;
-        int column=0;
+        int row = 0;
+        int column = 0;
 
         while (true) {
             try { //Try/catch för att säkerställa rätt input
@@ -47,8 +50,8 @@ public class Game {
                 row = Character.getNumericValue(input.charAt(0));
                 column = Character.getNumericValue(input.charAt(1));
 
-                if(board.isValidMove(row,column)){
-                   break;
+                if (board.isValidMove(row, column)) {
+                    break;
                 }
 
 
@@ -58,9 +61,10 @@ public class Game {
             }
         }
 
-        revealOrFlag(row,column);
+        revealOrFlag(row, column);
     }
-    public void revealOrFlag(int row, int column){
+
+    public void revealOrFlag(int row, int column) {
 
         Tile selectedTile = board.getTile(row, column);
 
@@ -86,17 +90,15 @@ public class Game {
             System.out.println("Invalid position, please try again!");
         }
     }
+
     public void play() {
 
-        System.out.println();
-        System.out.println("\uD83D\uDCA3 WELCOME TO MINESWEEPER! \uD83D\uDCA3");
-        System.out.println();
-      
         boolean gameOver = false;
+        board.placeMines();
+
         do {
-            // board.showAllTiles();
             board.displayBoard();
-            this.openTile();
+            this.chooseTile();
 
             if (isGameLost()) {
                 board.showAllTiles();
@@ -136,10 +138,11 @@ public class Game {
             }
         }
         return true;
-}
+    }
+
     public void playAgain() {
         while (playAgain) {
-            Game game = new Game(9, 10, playerName);
+            Game game = new Game(10, 10, playerName);
             game.play();
 
             while (true) {
@@ -157,4 +160,5 @@ public class Game {
                 }
             }
         }
-    }}
+    }
+}

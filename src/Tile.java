@@ -5,12 +5,11 @@ public class Tile {
     private boolean isFlagged;
 
 
-    public Tile(boolean isMine){
-        this.isMine=isMine;
-        this.isRevealed=false;
-        this.isFlagged=false;
+    public Tile(boolean isMine) {
+        this.isMine = isMine;
+        this.isRevealed = false;
+        this.isFlagged = false;
     }
-
     public boolean isMine() {
         return isMine;
     }
@@ -22,11 +21,11 @@ public class Tile {
     public boolean isRevealed() {
         return isRevealed;
     }
+
     public void reveal() {
         //Avslöjar en ruta på spelbrädet
         isRevealed = true;
     }
-
     public boolean isFlagged() {
         return isFlagged;
     }
@@ -34,6 +33,4 @@ public class Tile {
     public void toggleFlag() {
         isFlagged = !isFlagged;
     }
-
-
 }
