@@ -7,7 +7,13 @@ public class Game {
     private Gameboard board;
     boolean playAgain = true;
 
-
+    public Game(int size, int numMines, String playerName) {
+//        Game: Den här klassen kontrollerar spelets logik. Den håller koll på spelets status (pågående, vunnet, förlorat),
+//        startar ett nytt spel, och kanske även kontrollerar spelarens interaktioner.
+        this.board = new Gameboard(size, numMines);
+        this.playerName = playerName;
+    }
+  
     public void enterUsername() {
         while (true) {
             System.out.print("Enter your name: ");
@@ -19,32 +25,43 @@ public class Game {
             }
         }
     }
-    public Game(int size, int numMines, String playerName) {
-//        Game: Den här klassen kontrollerar spelets logik. Den håller koll på spelets status (pågående, vunnet, förlorat),
-//        startar ett nytt spel, och kanske även kontrollerar spelarens interaktioner.
-        this.board = new Gameboard(size, numMines);
-        this.playerName = playerName;
-    }
 
     public void openTile() {
-        System.out.print(playerName + ": Enter row and column to reveal (e.g. 24): ");
+        //System.out.print(playerName + ": Enter row and column to reveal (e.g. 24): ");
 
-        String input = scan.nextLine();
-        boolean gameOver=false;
+        boolean validInput=false;
+
+        int row=0;
+        int column=0;
+
+        while (true) {
+            try { //Try/catch för att säkerställa rätt input
+                System.out.print(playerName + ": Enter row and column to reveal (e.g. 00): ");
+                String input = scan.nextLine();
+                if (input.length() != 2) {
+                    System.out.println("Invalid input. Please enter two digits for row and column.");
+                    continue;
+                }
 
 
-//        while (board.isValidMove(row, column)) {
-//            try { //Try/catch för att säkerställa rätt input
-//                System.out.print(playerName + ", Enter row and column to reveal (e.g., 00): ");
-//                String input = scan.next();
-//                if (input.length() != 2) {
-//                    System.out.println("Invalid input. Please enter two digits for row and column.");
-//                    continue;
-//                }
+                row = Character.getNumericValue(input.charAt(0));
+                column = Character.getNumericValue(input.charAt(1));
 
-        int row = Character.getNumericValue(input.charAt(0));
-        int column = Character.getNumericValue(input.charAt(1));
-  
+                if(board.isValidMove(row,column)){
+                   break;
+                }
+
+
+            } catch (java.util.InputMismatchException e) { //Returnerar ifall man anger fler än 2 fel input
+                System.out.println("Invalid input! Please enter two numbers between " + "1 - " + board.getSize());
+                scan.nextLine(); // Clear the input buffer
+            }
+        }
+
+        revealOrFlag(row,column);
+    }
+    public void revealOrFlag(int row, int column){
+
         Tile selectedTile = board.getTile(row, column);
 
         if (selectedTile != null) {
@@ -60,7 +77,7 @@ public class Game {
 
             if (action.equalsIgnoreCase("R")) {
                 board.revealTile(row, column);
-         
+
 
             } else if (action.equalsIgnoreCase("F")) {
                 board.toggleFlag(row, column);
@@ -68,9 +85,12 @@ public class Game {
         } else {
             System.out.println("Invalid position, please try again!");
         }
-
     }
     public void play() {
+
+        System.out.println();
+        System.out.println("\uD83D\uDCA3 WELCOME TO MINESWEEPER! \uD83D\uDCA3");
+        System.out.println();
       
         boolean gameOver = false;
         do {
@@ -116,8 +136,7 @@ public class Game {
             }
         }
         return true;
-    }
-
+}
     public void playAgain() {
         while (playAgain) {
             Game game = new Game(9, 10, playerName);

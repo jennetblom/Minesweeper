@@ -13,7 +13,6 @@ public class Main {
 
         String playerName = "";
 
-
         Game game = new Game(9, 10, playerName);
         game.enterUsername();
         game.playAgain();
