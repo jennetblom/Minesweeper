@@ -99,7 +99,32 @@ public class Gameboard {
         }
 
     }
-    public void revealTile(int row, int col) {
+
+    public void revealTile(int row, int col) { //Öppna brädet till närmsta högre siffra än 0 ifall man träffar en nolla
+        if (row < 0 || row >= size || col < 0 || col >= size || board[row][col].isRevealed()) {
+            return; // Return if the tile is out of bounds or already revealed.
+        }
+
+        board[row][col].reveal();
+
+        if (board[row][col].isMine()) {
+            return; // Return if it's a mine.
+        }
+
+        if (countAdjacentMines(row, col) == 0) {
+// If it's a "0" tile, reveal all nearby tiles with "0" until a higher number is revealed
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    int adjacentRow = row + i;
+                    int adjacentCol = col + j;
+                    if (isWithinBoard(adjacentRow, adjacentCol)) {
+                        revealTile(adjacentRow, adjacentCol);
+                    }
+                }
+            }
+        }
+    }
+    public void revealFirstTile(int row, int col) {
         //Kontrollerar att det är inom spelplanets gränser och att rutan inte redan är avslöjad.
         if (row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed()) {
             board[row][col].reveal();
@@ -149,10 +174,9 @@ public class Gameboard {
         }
         displayBoard();
     }
-    private boolean isValidMove(int row, int col) {
+    public boolean isValidMove(int row, int col) {
         return row >= 0 && row < size && col >= 0 && col < size  && !board[row][col].isRevealed();
     }
-
     public Tile getTile(int row, int col) {
 
         if (isWithinBoard(row, col)) {
