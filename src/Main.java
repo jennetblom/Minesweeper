@@ -8,12 +8,9 @@ public class Main {
 //        Main: Den här klassen startar spelet.
 //        Den kan skapa ett nytt Game-objekt och sedan köra spelet.
 
-
-        Scanner scan = new Scanner(System.in);
-
         String playerName = "";
 
-        Game game = new Game(9, 10, playerName);
+        Game game = new Game(10, 10, playerName);
         game.enterUsername();
         game.playAgain();
 

@@ -32,7 +32,8 @@ public class Gameboard {
                 board[row][col] = new Tile(false);
             }
         }
-
+    }
+    public void placeMines(){
         //Placerar ut minor på spelbrädet på slumpmässiga platser.
         Random random = new Random();
         int minesPlaced = 0;
@@ -47,7 +48,6 @@ public class Gameboard {
                 minesPlaced++;
             }
         }
-
     }
 
     public void displayBoard() {

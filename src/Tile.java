@@ -34,6 +34,4 @@ public class Tile {
     public void toggleFlag() {
         isFlagged = !isFlagged;
     }
-
-
 }
