@@ -5,7 +5,6 @@ public class Gameboard {
 //    initializeBoard(): Denna metod kan användas för att skapa brädet och placera ut minor på slumpmässiga platser.
 //    displayBoard(): Denna metod kan användas för att visa brädet för spelaren.
 //    Kanske visa okända rutor som frågetecken, flaggade rutor som flaggor, etc.
-
 //    Gameboard: Den här klassen representerar spelbrädet. Den håller koll på alla tiles (rutor),
 //    samt kanske checka statusen på en tile (om det är en bomb, om den är markerad, etc).
     private static Tile[][] board;
@@ -33,7 +32,8 @@ public class Gameboard {
             }
         }
     }
-    public void placeMines(){
+
+    public void placeMines() {
         //Placerar ut minor på spelbrädet på slumpmässiga platser.
         Random random = new Random();
         int minesPlaced = 0;
@@ -59,12 +59,12 @@ public class Gameboard {
         //Undersökt ruta med bomber bredvid = 1+;
 
         System.out.print("  |");
-        for(int col=0; col<board.length;col++){
+        for (int col = 0; col < board.length; col++) {
             System.out.print(" " + col + "  ");
         }
         System.out.println();
         System.out.print("--|");
-        for(int col=0;col< board.length;col++){
+        for (int col = 0; col < board.length; col++) {
             System.out.print("---|");
         }
         System.out.println();
@@ -72,7 +72,7 @@ public class Gameboard {
 
         for (int row = 0; row < size; row++) {
 
-                System.out.print(row + " | ");
+            System.out.print(row + " | ");
             for (int col = 0; col < size; col++) {
                 Tile tile = board[row][col];
                 if (tile.isRevealed()) {
@@ -92,7 +92,7 @@ public class Gameboard {
             System.out.println();
             System.out.print("  |");
 
-            for(int col=0;col<board.length;col++){
+            for (int col = 0; col < board.length; col++) {
                 System.out.print("___|");
             }
             System.out.println();
@@ -124,6 +124,7 @@ public class Gameboard {
             }
         }
     }
+
     public void revealFirstTile(int row, int col) {
         //Kontrollerar att det är inom spelplanets gränser och att rutan inte redan är avslöjad.
         if (row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed()) {
@@ -165,18 +166,21 @@ public class Gameboard {
         //Kontrollerar att det är inom spelbrädets gränser.
         return row >= 0 && row < size && col >= 0 && col < size;
     }
+
     public void showAllTiles() {
 
-        for(int row=0;row< board.length;row++){
-            for(int column=0;column< board.length;column++){
-                revealTile(row,column);
+        for (int row = 0; row < board.length; row++) {
+            for (int column = 0; column < board.length; column++) {
+                revealTile(row, column);
             }
         }
         displayBoard();
     }
+
     public boolean isValidMove(int row, int col) {
-        return row >= 0 && row < size && col >= 0 && col < size  && !board[row][col].isRevealed();
+        return row >= 0 && row < size && col >= 0 && col < size && !board[row][col].isRevealed();
     }
+
     public Tile getTile(int row, int col) {
 
         if (isWithinBoard(row, col)) {

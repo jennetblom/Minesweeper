@@ -16,5 +16,4 @@ public class Main {
 
         System.out.println("Thanks for playing!");
     }
-
 }

@@ -13,7 +13,7 @@ public class Game {
         this.board = new Gameboard(size, numMines);
         this.playerName = playerName;
     }
-  
+
     public void enterUsername() {
         while (true) {
             System.out.println();
@@ -32,10 +32,10 @@ public class Game {
 
     public void chooseTile() {
 
-        boolean validInput=false;
+        boolean validInput = false;
 
-        int row=0;
-        int column=0;
+        int row = 0;
+        int column = 0;
 
         while (true) {
             try { //Try/catch för att säkerställa rätt input
@@ -50,8 +50,8 @@ public class Game {
                 row = Character.getNumericValue(input.charAt(0));
                 column = Character.getNumericValue(input.charAt(1));
 
-                if(board.isValidMove(row,column)){
-                   break;
+                if (board.isValidMove(row, column)) {
+                    break;
                 }
 
 
@@ -61,9 +61,10 @@ public class Game {
             }
         }
 
-        revealOrFlag(row,column);
+        revealOrFlag(row, column);
     }
-    public void revealOrFlag(int row, int column){
+
+    public void revealOrFlag(int row, int column) {
 
         Tile selectedTile = board.getTile(row, column);
 
@@ -89,8 +90,9 @@ public class Game {
             System.out.println("Invalid position, please try again!");
         }
     }
+
     public void play() {
-      
+
         boolean gameOver = false;
         board.placeMines();
 
@@ -136,7 +138,8 @@ public class Game {
             }
         }
         return true;
-}
+    }
+
     public void playAgain() {
         while (playAgain) {
             Game game = new Game(10, 10, playerName);
@@ -157,4 +160,5 @@ public class Game {
                 }
             }
         }
-    }}
+    }
+}
