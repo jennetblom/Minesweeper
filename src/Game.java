@@ -2,19 +2,32 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
+    private static String playerName;
     static Scanner scan = new Scanner(System.in);
     private Gameboard board;
 
-    public Game(int size, int numMines) {
+    public Game(int size, int numMines, String playerName) {
 //        Game: Den här klassen kontrollerar spelets logik. Den håller koll på spelets status (pågående, vunnet, förlorat),
 //        startar ett nytt spel, och kanske även kontrollerar spelarens interaktioner.
         this.board = new Gameboard(size, numMines);
+        this.playerName = playerName;
     }
 
     public void openTile() {
-        System.out.println("Which tile do you want to choose? Choose which row and column!");
-        
+        System.out.print(playerName + ": Enter row and column to reveal (e.g. 24): ");
+
         String input = scan.nextLine();
+        boolean gameOver=false;
+
+
+//        while (board.isValidMove(row, column)) {
+//            try { //Try/catch för att säkerställa rätt input
+//                System.out.print(playerName + ", Enter row and column to reveal (e.g., 00): ");
+//                String input = scan.next();
+//                if (input.length() != 2) {
+//                    System.out.println("Invalid input. Please enter two digits for row and column.");
+//                    continue;
+//                }
 
         int row = Character.getNumericValue(input.charAt(0));
         int column = Character.getNumericValue(input.charAt(1));
