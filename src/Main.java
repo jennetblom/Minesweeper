@@ -7,7 +7,7 @@ public class Main {
 //
 //        Main: Den här klassen startar spelet.
 //        Den kan skapa ett nytt Game-objekt och sedan köra spelet.
-        
+
 
         Scanner scan = new Scanner(System.in);
         boolean playAgain = true;
