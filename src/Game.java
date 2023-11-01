@@ -32,8 +32,6 @@ public class Game {
 
     public void chooseTile() {
 
-        boolean validInput = false;
-
         int row = 0;
         int column = 0;
 
