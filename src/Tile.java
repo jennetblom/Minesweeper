@@ -1,10 +1,11 @@
 public class Tile {
 
+    //A tile represents a square on the gameboard.
     private boolean isMine;
     private boolean isRevealed;
     private boolean isFlagged;
 
-
+    //When the tile is first created, the information of the tile is hidden.
     public Tile(boolean isMine) {
         this.isMine = isMine;
         this.isRevealed = false;
@@ -23,7 +24,7 @@ public class Tile {
     }
 
     public void reveal() {
-        //Avslöjar en ruta på spelbrädet
+        //Reveals a tile
         isRevealed = true;
     }
     public boolean isFlagged() {
