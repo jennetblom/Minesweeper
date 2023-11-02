@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class Game {
     //Game: This class controls the logic of the game.
-    //It keeps track of the gamestate(running, won or lost), creates a new game and controls the interaction with the player.
+    //It keeps track of the gamestate (running, won or lost), creates a new game and
+    // controls the interaction with the player.
     private static String playerName;
     static Scanner scan = new Scanner(System.in);
     private Gameboard board;
