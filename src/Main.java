@@ -4,9 +4,7 @@ import java.util.Scanner;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-//
-//        Main: Den här klassen startar spelet.
-//        Den kan skapa ett nytt Game-objekt och sedan köra spelet.
+        //Main: This class creates a new Game-object and runs the game.
 
         String playerName = "";
 
@@ -14,6 +12,5 @@ public class Main {
         game.enterUsername();
         game.playAgain();
 
-        System.out.println("Thanks for playing!");
     }
 }

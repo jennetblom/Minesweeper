@@ -2,13 +2,10 @@ import java.util.Random;
 
 public class Gameboard {
 
-//    initializeBoard(): Denna metod kan användas för att skapa brädet och placera ut minor på slumpmässiga platser.
-//    displayBoard(): Denna metod kan användas för att visa brädet för spelaren.
-//    Kanske visa okända rutor som frågetecken, flaggade rutor som flaggor, etc.
-//    Gameboard: Den här klassen representerar spelbrädet. Den håller koll på alla tiles (rutor),
-//    samt kanske checka statusen på en tile (om det är en bomb, om den är markerad, etc).
+    //Gameboard: This class represents the gameboard. It keeps track of the tiles and contains the visual presentation of the gameboard.
+
     private static Tile[][] board;
-    //Skapar en 2D-array av spelbrädan bestående av Tile.
+    //Creates a 2D-array of the gameboard containing tiles.
     private int size;
     private int numMines;
 
@@ -25,7 +22,7 @@ public class Gameboard {
     }
 
     private void initializeBoard() {
-        //Fyller brädan med tomma rutor
+        //Fills the board with empty tiles
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 board[row][col] = new Tile(false);
@@ -34,7 +31,7 @@ public class Gameboard {
     }
 
     public void placeMines() {
-        //Placerar ut minor på spelbrädet på slumpmässiga platser.
+        //Places mines on the board on random places
         Random random = new Random();
         int minesPlaced = 0;
 
@@ -42,7 +39,7 @@ public class Gameboard {
             int row = random.nextInt(size);
             int col = random.nextInt(size);
             if (!board[row][col].isMine()) {
-                //Om rutan inte håller en mina redan, ska en mina placeras
+                //If the tile does not already contain a mine, a mine will be placed.
 
                 board[row][col] = new Tile(true);
                 minesPlaced++;
@@ -51,12 +48,9 @@ public class Gameboard {
     }
 
     public void displayBoard() {
-//        //Ritar ut spelbrädet
+        //Draws the board.
+        //Bomb = Red cross(X)
 
-        //Bomb = Rött kryss = "X ";
-        //Inte undersökt ruta = "."
-        //Undersökt ruta utan bomber bredvid = 0;
-        //Undersökt ruta med bomber bredvid = 1+;
 
         System.out.print("  |");
         for (int col = 0; col < board.length; col++) {
@@ -101,7 +95,8 @@ public class Gameboard {
     }
 
     public void revealTile(int row, int col) {
-        //Öppna brädet till närmsta högre siffra än 0 ifall man träffar en nolla
+        //Reveal the board up to the nearest higher number than 0, if a zero is encountered.
+
         if (row < 0 || row >= size || col < 0 || col >= size || board[row][col].isRevealed()) {
             return; // Return if the tile is out of bounds or already revealed.
         }
@@ -113,7 +108,7 @@ public class Gameboard {
         }
 
         if (countAdjacentMines(row, col) == 0) {
-// If it's a "0" tile, reveal all nearby tiles with "0" until a higher number is revealed
+        // If it's a "0" tile, reveal all nearby tiles with "0" until a higher number is revealed
             for (int i = -1; i <= 1; i++) {
                 for (int j = -1; j <= 1; j++) {
                     int adjacentRow = row + i;
@@ -127,14 +122,14 @@ public class Gameboard {
     }
     public int countAdjacentMines(int row, int col) {
 
-        //Räknar antalet minor precis bredvid en ruta.
+        //Counts the number of mines adjacent to a tile.
 
         int count = 0;
 
 
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
-                // Hoppa över den aktuella rutan
+                //Skips the actual square
                 if (i == 0 && j == 0) {
                     continue;
                 }
@@ -142,7 +137,7 @@ public class Gameboard {
                 int adjacentRow = row + i;
                 int adjacentCol = col + j;
 
-                // Kontrollera om den närliggande rutan är inom brädet
+                //Controls if the adjacent is within the board.
                 if (isWithinBoard(adjacentRow, adjacentCol)) {
                     Tile adjacentTile = board[adjacentRow][adjacentCol];
                     if (adjacentTile.isMine()) {
@@ -156,12 +151,13 @@ public class Gameboard {
     }
 
     public boolean isWithinBoard(int row, int col) {
-        //Kontrollerar att det är inom spelbrädets gränser.
+       //Controls if it's within board.
         return row >= 0 && row < size && col >= 0 && col < size;
     }
 
     public void showAllTiles() {
 
+        //Reveals all tiles.
         for (int row = 0; row < board.length; row++) {
             for (int column = 0; column < board.length; column++) {
                 revealTile(row, column);
