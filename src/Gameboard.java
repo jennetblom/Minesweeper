@@ -2,7 +2,8 @@ import java.util.Random;
 
 public class Gameboard {
 
-    //Gameboard: This class represents the gameboard. It keeps track of the tiles and contains the visual presentation of the gameboard.
+    //Gameboard: This class represents the gameboard. It keeps track of the tiles and
+    // contains the visual presentation of the gameboard.
 
     private static Tile[][] board;
     //Creates a 2D-array of the gameboard containing tiles.
@@ -10,7 +11,7 @@ public class Gameboard {
     private int numMines;
 
     public Gameboard(int size, int numMines) {
-        //Tar in hur stort spelbrädet ska vara och hur många minor.
+        // Takes in the size of the game board and the number of mines
         this.size = size;
         this.numMines = numMines;
         this.board = new Tile[size][size];
